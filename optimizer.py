@@ -72,11 +72,11 @@ def main(argv):
 
     # Select number of repetitions for each experiment.
     # To obtain meaningful statistical results, usually 30 independent runs are executed for each algorithm.
-    NumOfRuns = 2
+    NumOfRuns = 30
 
     # Select general parameters for all optimizers (population size, number of iterations)
-    PopulationSize = 30
-    Iterations = 500
+    PopulationSize = 50
+    Iterations = 500000
 
     # Export results ?
     Export = True
