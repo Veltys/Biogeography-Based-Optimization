@@ -47,8 +47,8 @@ def main(argv):
     BBO = True # Code by Raju Pal & Himanshu Mittal
 
     # Select benchmark function
-    F1 = True
-    F2 = False
+    F1 = False
+    F2 = True
     F3 = False
     F4 = False
     F5 = False
