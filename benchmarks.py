@@ -19,18 +19,30 @@ Code compatible:
 """
 
 
+import ctypes
+import os
+
 import numpy
 
-# define the function blocks
 
+# define the function blocks
 def F1(x):
     s = numpy.sum(x ** 2);
     return s
 
 
+def F2(x):
+    libtest = ctypes.CDLL(os.path.dirname(os.path.abspath(__file__)) + os.sep + 'libbenchmark.' + ('dll' if os.name == 'nt' else 'so'))
+    libtest.cec20_bench.argtypes = (ctypes.c_size_t, ctypes.c_size_t, ctypes.POINTER(ctypes.c_double * len(x)))
+    libtest.cec20_bench.restype = ctypes.c_double
+
+    return libtest.cec20_bench(1, x.size, (ctypes.c_double * len(x))(*x))
+
+
 def getFunctionDetails(a):
     # [name, lb, ub, dim]
     param = {  0: ["F1",-100,100,30],
+               1: ["F2", -100, 100, 50],
             }
     return param.get(a, "nothing")
 
