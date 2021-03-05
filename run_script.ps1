@@ -27,7 +27,7 @@ for($i = $funciones[0]; $i -le $funciones[1]; $i += $funciones[2]) {
 	for($j = $dimensiones[0]; $j -le $dimensiones[1]; $j += $dimensiones[2]) {
 		Write-Output "Función $i, dimensión $j"
 
-		.\optimizer.py
+		.\optimizer.py -d $j
 	}
 }
 

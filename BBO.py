@@ -27,6 +27,7 @@ import time
 import numpy
 
 import ClearDups
+import Config
 from solution import solution
 
 
@@ -50,6 +51,8 @@ def BBO(objf, lb, ub, dim, popSize, iters):
 
     # Initializing Population
     pos = numpy.random.uniform(0, 1, (popSize, dim)) * (ub - lb) + lb
+
+    cnf = Config.Config()
 
     #Calculate objective function for each particle
     for i in range(popSize):
@@ -140,11 +143,13 @@ def BBO(objf, lb, ub, dim, popSize, iters):
         # Saving the best individual
         minCost[l] = fit[1]
         # Bestpos = pos[1,:]
-        gBestScore = fit[1]
 
-        # Displaying the best fitness of each iteration
-        if (l % 1 == 0):
-            print(['At iteration ' + str(l + 1) + ' the best fitness is ' + str(gBestScore)])
+        if(cnf.verbosity):
+            gBestScore = fit[1]
+
+            # Displaying the best fitness of each iteration
+            if (l % 1 == 0):
+                print(['At iteration ' + str(l + 1) + ' the best fitness is ' + str(gBestScore)])
 
     timerEnd = time.time()
     s.endTime = time.strftime("%Y-%m-%d-%H-%M-%S")

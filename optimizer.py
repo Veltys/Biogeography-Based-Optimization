@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-
-
 """
 Python code of Biogeography-Based Optimization (BBO)
 
@@ -20,14 +18,15 @@ Code compatible:
  -- Python: 2.* or 3.*
 """
 
-
 import csv
+import getopt
 import sys
 import time
 
 import numpy
 
 import BBO as bbo
+import Config
 import benchmarks
 
 
@@ -37,12 +36,29 @@ def selector(algo, func_details, popSize, Iter):
     ub = func_details[2]
     dim = func_details[3]
 
-    if(algo==0):
+    if(algo == 0):
         x = bbo.BBO(getattr(benchmarks, function_name), lb, ub, dim, popSize, Iter)
     return x
 
 
 def main(argv):
+    cnf = Config.Config()
+
+    try:
+        opts, _ = getopt.getopt(argv, 'd:v',
+                                   ['dim='])
+    except getopt.GetoptError:
+        print('Usage: optimizer.py [-d dimensions or --dim=dimensions] [-v]')
+
+        sys.exit(2)
+
+    for opt, arg in opts:
+        if opt in ('-d', '--dim'):
+            cnf.dimensions = int(arg)
+
+        if opt in ('-v'):
+            cnf.verbosity = True
+
     # Select optimizers
     BBO = True # Code by Raju Pal & Himanshu Mittal
 

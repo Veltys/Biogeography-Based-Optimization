@@ -24,6 +24,8 @@ import os
 
 import numpy
 
+import Config
+
 
 # define the function blocks
 def F1(x):
@@ -40,9 +42,11 @@ def F2(x):
 
 
 def getFunctionDetails(a):
+    cnf = Config.Config()
+
     # [name, lb, ub, dim]
-    param = {  0: ["F1",-100,100,30],
-               1: ["F2", -100, 100, 50],
+    param = {  0: ["F1", -100, 100, 30],
+               1: ["F2", -100, 100, cnf.dimensions],
             }
     return param.get(a, "nothing")
 
