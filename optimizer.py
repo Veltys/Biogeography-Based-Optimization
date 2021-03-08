@@ -92,7 +92,7 @@ def main(argv):
 
     # Select general parameters for all optimizers (population size, number of iterations)
     populationSize = 50
-    iterations = 500000
+    iterations = 1500
 
     # Export results ?
     export = True
