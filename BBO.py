@@ -54,11 +54,14 @@ def BBO(objf, lb, ub, dim, popSize, iters):
 
     cnf = Config.Config()
 
+    evals = 0
+
     #Calculate objective function for each particle
     for i in range(popSize):
         # Performing the bound checking
         pos[i,:] = numpy.clip(pos[i,:], lb, ub)
         fitness = objf(pos[i,:])
+        evals += 1
         fit[i] = fitness
 
     # Calculating the mu and lambda
@@ -73,6 +76,10 @@ def BBO(objf, lb, ub, dim, popSize, iters):
 
     # Defining the loop
     for l in range(iters):
+        # Stop when evaluation limit is reached
+        if evals >= cnf.evals:
+            break
+
         # Defining the Elite Solutions
         for j in range(keep):
             eliteSolution[j,:] = pos[j,:]
@@ -111,6 +118,7 @@ def BBO(objf, lb, ub, dim, popSize, iters):
         #Calculate objective function for each individual
         for i in range(popSize):
             fitness = objf(pos[i,:])
+            evals += 1
             fit[i] = fitness
 
         # Sort the fitness
@@ -131,6 +139,7 @@ def BBO(objf, lb, ub, dim, popSize, iters):
         #Calculate objective function for each individual
         for i in range(popSize):
             fitness = objf(pos[i,:])
+            evals += 1
             fit[i] = fitness
 
         # Sort the fitness

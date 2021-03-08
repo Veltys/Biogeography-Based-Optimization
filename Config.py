@@ -14,4 +14,5 @@ class ConfigSingleton(type):
 class Config(metaclass = ConfigSingleton):
     def __init__(self):
         self.dimensions = 10
+        self.evals = 500000
         self.verbosity = False
