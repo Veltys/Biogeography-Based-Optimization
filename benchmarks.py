@@ -34,11 +34,13 @@ def F1(x):
 
 
 def F2(x):
+    cnf = Config.Config()
+
     libtest = ctypes.CDLL(os.path.dirname(os.path.abspath(__file__)) + os.sep + 'libbenchmark.' + ('dll' if os.name == 'nt' else 'so'))
-    libtest.cec20_bench.argtypes = (ctypes.c_size_t, ctypes.c_size_t, ctypes.POINTER(ctypes.c_double * len(x)))
+    libtest.cec20_bench.argtypes = (ctypes.c_size_t, ctypes.c_size_t, ctypes.POINTER(ctypes.c_double * len(x)), ctypes.c_ushort)
     libtest.cec20_bench.restype = ctypes.c_double
 
-    return libtest.cec20_bench(1, x.size, (ctypes.c_double * len(x))(*x))
+    return libtest.cec20_bench(1, x.size, (ctypes.c_double * len(x))(*x), cnf.benchmark)
 
 
 def getFunctionDetails(function):

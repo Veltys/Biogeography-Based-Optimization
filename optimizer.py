@@ -45,18 +45,28 @@ def main(argv):
     cnf = Config.Config()
 
     try:
-        opts, _ = getopt.getopt(argv, 'd:v',
-                                   ['dim='])
+        opts, _ = getopt.getopt(
+            argv,
+            'b:d:v',
+            [
+                'bench=',
+                'dim=',
+            ]
+        )
+
     except getopt.GetoptError:
-        print('Usage: optimizer.py [-d dimensions or --dim=dimensions] [-v]')
+        print('Usage: optimizer.py [-b benchmark_id or --bench=benchmark_id] [-d dimensions or --dim=dimensions] [-v]')
 
         sys.exit(2)
 
     for opt, arg in opts:
-        if opt in ('-d', '--dim'):
+        if opt in ('-b', '--bench'):
+            cnf.benchmark = int(arg)
+
+        elif opt in ('-d', '--dim'):
             cnf.dimensions = int(arg)
 
-        if opt in ('-v'):
+        elif opt in ('-v'):
             cnf.verbosity = True
 
     # Select optimizers
