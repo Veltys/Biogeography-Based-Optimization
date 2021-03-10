@@ -23,6 +23,6 @@ for (( i=funciones[0]; i<=funciones[1]; i++ )); do
 	for (( j=dimensiones[0]; j<=dimensiones[1]; j=j+5 )); do
 		echo "Función $i, dimensión $j"
 
-		./optimizer.py -b $i -d $j
+		./optimizer.py -b "$i" -d "$j"
 	done
 done
