@@ -45,7 +45,7 @@ for (( i=funciones[0]; i<=funciones[1]; i++ )); do
 		declare -A res
 
 		for (( k=0; k<30; k++ )); do
-			linea=$(sed -n "$((k + 2)) p" "./$archivo")
+			linea=$(sed -n "$(((k + 2) * 2)) p" "./$archivo")
 
 			linea=(${linea//,/ })
 
@@ -53,7 +53,7 @@ for (( i=funciones[0]; i<=funciones[1]; i++ )); do
 				# Número de columna a leer
 				numColumna=$(awk "BEGIN {print int($j ^ ($l / 5 - 3) * 150000)}")
 
-				elemento=${linea[$((numColumna + 5))]}
+				elemento=${linea[$((numColumna + 4))]}
 
 				# Algunas líneas podrían no existir, debido a los criterios de parada
 				if ! [[ -z "$linea" ]]; then

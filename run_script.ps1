@@ -53,7 +53,7 @@ for($i = $funciones[0]; $i -le $funciones[1]; $i += $funciones[2]) {
 		}
 
 		for($k = 0; $k -lt 30; $k++) {
-	        $linea = Get-Content $archivo.FullName | Select -Index ($k + 1)
+	        $linea = Get-Content $archivo.FullName | Select -Index (($k + 1) * 2)
 
 			$linea = $linea.Split(',')
 
@@ -61,7 +61,7 @@ for($i = $funciones[0]; $i -le $funciones[1]; $i += $funciones[2]) {
 				# Número de columna a leer
 				$numColumna = [Math]::Round([Math]::Pow($j, $l / 5 - 3) * 150000)
 
-				$elemento = $linea[$numColumna + 5]
+				$elemento = $linea[$numColumna + 4]
 
 				# Algunas líneas podrían no existir, debido a los criterios de parada
 		        if($linea -match '^[-]?[0-9]+\.?[0-9]*$') {
