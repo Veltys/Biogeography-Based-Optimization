@@ -204,4 +204,4 @@ input_data
 libbenchmark.dll
 libbenchmark.so
 experiment*.csv
-*_?_*.txt
+BBO_[0-9]*_[0-9][0-9].txt
