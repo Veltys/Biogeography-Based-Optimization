@@ -78,7 +78,7 @@ def posprocesar(dimensiones):
             elemento = linea[numColumna + 4]
 
             # Algunas líneas podrían no existir, debido a los criterios de parada
-            if re.match(r"^\d*[.,]?\d*$", elemento):
+            if elemento != '':
                 res[j][i] = elemento
             else:
                 # En tal caso, se copia el resultado de la línea anterior
