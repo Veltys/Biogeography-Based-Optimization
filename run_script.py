@@ -14,11 +14,13 @@ import optimizer
 
 def guardar(alg, funcion, dimensiones, res):
     try:
-        out = open(alg + '_' + str(funcion) + '_' + str(dimensiones) + '.txt', 'w')
+        fileName = f'{alg}_{funcion}_{dimensiones}.txt'
+
+        out = open(fileName, 'w')
 
     except IOError:
-        print('Error de apertura del archivo <' + alg + '_' + str(funcion) + '_' + str(dimensiones) + '.txt>')
-        print('ERROR: imposible abrir el archivo <' + alg + '_' + str(funcion) + '_' + str(dimensiones) + '.txt>', file = sys.stderr)
+        print(f"Error de apertura del archivo <{fileName}>")
+        print(f"ERROR: imposible abrir el archivo <{fileName}>", file = sys.stderr)
 
         exit(os.EX_OSFILE) # @UndefinedVariable
 
@@ -106,12 +108,13 @@ def main(argv):
                     (len(argv) == 5 and argv[4] == '-r') \
                 ):
                 # Procesamiento: ejecución del programa
-                print('Función ' + str(i + funciones[2]) + ' dimensión ' + str(j + dimensiones[2]))
+                print(f"Función {i + funciones[2]}, dimensión {j + dimensiones[2]}")
 
                 optimizer.main(['-b', str(i + funciones[2]), '-d', str(j + dimensiones[2])])
 
             # Posprocesamiento: recopilación de resultados
             guardar(alg, i + funciones[2], j + dimensiones[2], posprocesar(j + dimensiones[2]))
+
 
 if __name__ == '__main__':
     main(sys.argv[1:])
