@@ -41,14 +41,15 @@ def F2(x):
     return libtest.cec20_bench(1, x.size, (ctypes.c_double * len(x))(*x))
 
 
-def getFunctionDetails(a):
+def getFunctionDetails(function):
     cnf = Config.Config()
 
     # [name, lb, ub, dim]
     param = {  0: ["F1", -100, 100, 30],
                1: ["F2", -100, 100, cnf.dimensions],
             }
-    return param.get(a, "nothing")
+
+    return param.get(function, "nothing")
 
 
 

@@ -24,13 +24,13 @@ import random
 import numpy
 
 
-def ClearDups(Population, PopSize, dim, MaxParValue, MinParValue):
+def ClearDups(population, popSize, dim, maxParValue, minParValue):
 
-    for i in range(PopSize):
-        Chrom1 = numpy.sort(Population[i,:]);
-        for j in range(i+1,PopSize):
-            Chrom2 = numpy.sort(Population[j,:]);
-            if Chrom1 is Chrom2:
-                parnum = numpy.ceil(dim * random.random());
-                Population[j,parnum] = MinParValue + (MaxParValue - MinParValue) * random.random();
-    return Population
+    for i in range(popSize):
+        chrom1 = numpy.sort(population[i,:])
+        for j in range(i + 1, popSize):
+            Chrom2 = numpy.sort(population[j,:])
+            if chrom1 is Chrom2:
+                parnum = numpy.ceil(dim * random.random())
+                population[j, parnum] = minParValue + (maxParValue - minParValue) * random.random()
+    return population

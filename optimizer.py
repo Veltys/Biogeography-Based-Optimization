@@ -88,45 +88,45 @@ def main(argv):
 
     # Select number of repetitions for each experiment.
     # To obtain meaningful statistical results, usually 30 independent runs are executed for each algorithm.
-    NumOfRuns = 30
+    numOfRuns = 30
 
     # Select general parameters for all optimizers (population size, number of iterations)
-    PopulationSize = 50
-    Iterations = 500000
+    populationSize = 50
+    iterations = 500000
 
     # Export results ?
-    Export = True
+    export = True
 
     # Automatically generated name by date and time
-    ExportToFile = "experiment" + time.strftime("%Y-%m-%d-%H-%M-%S") + ".csv"
+    exportToFile = "experiment" + time.strftime("%Y-%m-%d-%H-%M-%S") + ".csv"
 
     # Check if it works at least once
-    Flag = False
+    flag = False
 
     # CSV Header for for the convergence
-    CnvgHeader = []
+    cnvgHeader = []
 
-    for l in range(0, Iterations):
-        CnvgHeader.append("Iter" + str(l + 1))
+    for l in range(0, iterations):
+        cnvgHeader.append("Iter" + str(l + 1))
 
     for i, optimizer in enumerate(optimizers):
         for j, benchmarkfunc in enumerate(benchmarkfuncs):
             if((optimizer == True) and (benchmarkfunc == True)): # start experiment if an optimizer and an objective function is selected
-                for _ in range (0, NumOfRuns):
+                for _ in range(0, numOfRuns):
                     func_details = benchmarks.getFunctionDetails(j)
-                    x = selector(i, func_details, PopulationSize, Iterations)
-                    if(Export == True):
-                        with open(ExportToFile, 'a') as out:
+                    x = selector(i, func_details, populationSize, iterations)
+                    if(export == True):
+                        with open(exportToFile, 'a') as out:
                             writer = csv.writer(out, delimiter = ',')
-                            if (Flag == False): # just one time to write the header of the CSV file
-                                header = numpy.concatenate([["Optimizer", "objfname", "startTime", "EndTime", "ExecutionTime"], CnvgHeader])
+                            if (flag == False): # just one time to write the header of the CSV file
+                                header = numpy.concatenate([["Optimizer", "objfname", "startTime", "EndTime", "ExecutionTime"], cnvgHeader])
                                 writer.writerow(header)
                             a = numpy.concatenate([[x.optimizer, x.objfname, x.startTime, x.endTime, x.executionTime], x.convergence])
                             writer.writerow(a)
                         out.close()
-                    Flag = True # at least one experiment
+                    flag = True # at least one experiment
 
-    if (Flag == False): # Failed to run at least one experiment
+    if (flag == False): # Failed to run at least one experiment
         print("No Optomizer or Cost function is selected. Check lists of available optimizers and cost functions")
 
 
