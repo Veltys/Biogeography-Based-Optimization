@@ -65,6 +65,8 @@ def guardar(alg, funcion, dimensiones, res):
 
 
 def posprocesar(dimensiones):
+    offset = 4
+
     # Recogida de todos los archivos de salida
     archivo = [ name for name in os.listdir('.') if os.path.isfile(os.path.join('.', name)) and re.match(r"^experiment\d{4}-\d{2}-\d{2}-\d{2}-\d{2}-\d{2}.csv$", name) ]
 
@@ -82,14 +84,14 @@ def posprocesar(dimensiones):
             # Número de columna a leer
             numColumna = int(round((dimensiones ** (j / 5 - 3)) * 150000, 0))
 
-            elemento = linea[numColumna + 4]
+            try: # Algunas líneas podrían no existir, debido a los criterios de parada
+                elemento = linea[numColumna + offset]
 
-            # Algunas líneas podrían no existir, debido a los criterios de parada
-            if elemento != '':
-                res[j][i] = elemento
-            else:
-                # En tal caso, se copia el resultado de la línea anterior
+            except IndexError: # En tal caso, se copia el resultado de la línea anterior
                 res[j][i] = res[j - 1][i]
+
+            else:
+                res[j][i] = elemento
 
     os.remove(archivo)
 
